@@ -1,0 +1,62 @@
+# Visual Studio pliki u¿ytkownika
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.VC.db
+
+# Pliki binarne i kompilacji
+bin/
+obj/
+out/
+[Bb]uild/
+[Ll]og/
+*.cache
+*.ilk
+*.pdb
+*.obj
+*.exe
+*.dll
+*.pdb
+*.idb
+*.lib
+*.exp
+
+# Pliki zale¿noœci NuGet
+packages/
+project.lock.json
+project.assets.json
+*.nuget.props
+*.nuget.targets
+.nuget/
+
+# Pliki kompilacji C#
+*.csproj.user
+*.csproj.nuget.g.props
+*.csproj.nuget.g.targets
+
+# Pliki konfiguracji Ridera i JetBrains
+.idea/
+*.sln.iml
+
+# Pliki tymczasowe
+temp/
+*.tmp
+*.log
+
+# Pliki publikacji
+publish/
+wwwroot/
+app.publish/
+*.deploy
+
+# Pliki generowane przez testy jednostkowe
+TestResults/
+coverage/
+*.coverage
+*.coveragexml
+
+# Pliki konfiguracji systemu operacyjnego
+Desktop.ini
+Thumbs.db
