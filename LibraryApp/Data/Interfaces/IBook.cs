@@ -11,7 +11,7 @@ namespace Library.Data
         Guid Id { get; }
         string Title { get; }
         string Author { get; }
-        bool IsBorrowed { get; }
+        bool IsBorrowed { get; set; }
 
     }
 }
