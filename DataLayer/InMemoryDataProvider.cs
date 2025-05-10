@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
+[assembly: InternalsVisibleTo("LibraryTests")]
+
 namespace Library.Data
 {
-    public class InMemoryDataProvider : IDataProvider
+    internal class InMemoryDataProvider : IDataProvider
     {
         private readonly ILibraryState _state;
         private readonly List<IEvent> _events = new();
@@ -42,6 +45,17 @@ namespace Library.Data
             _state.Books.Clear();
             _state.Users.Clear();
             _events.Clear();
+        }
+
+        public void AddEvent(IUser user, IBook book, string description)
+        {
+            _events.Add(new Event
+            {
+                User = user,
+                Book = book,
+                Description = description,
+                Timestamp = DateTime.Now
+            });
         }
     }
 }

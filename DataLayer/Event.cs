@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Library.Data
 {
-    public class Event : IEvent
+    internal class Event : IEvent
     {
         public Guid Id { get; set; } = Guid.NewGuid();
         public DateTime Timestamp { get; set; } = DateTime.Now;

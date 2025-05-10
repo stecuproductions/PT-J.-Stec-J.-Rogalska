@@ -29,13 +29,9 @@ public class LibraryService
         book.IsBorrowed = true;
         user.BorrowedBooks.Add(book);
 
-        _dataProvider.GetEvents().Add(new Event
-        {
-            User = user,
-            Book = book,
-            Description = $"User '{user.Name}' borrowed '{book.Title}'",
-            Timestamp = DateTime.Now
-        });
+        var description = $"User '{user.Name}' borrowed '{book.Title}'";
+
+        _dataProvider.AddEvent(user, book, description);
 
         return true;
     }
@@ -52,13 +48,9 @@ public class LibraryService
         book.IsBorrowed = false;
         user.BorrowedBooks.Remove(book);
 
-        _dataProvider.GetEvents().Add(new Event
-        {
-            User = user,
-            Book = book,
-            Description = $"User '{user.Name}' returned '{book.Title}'",
-            Timestamp = DateTime.Now
-        });
+        var description = $"User '{user.Name}' returned '{book.Title}'";
+
+        _dataProvider.AddEvent(user, book, description);
 
         return true;
     }

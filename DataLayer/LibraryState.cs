@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Library.Data
 {
-    public class LibraryState : ILibraryState
+    internal class LibraryState : ILibraryState
     {
         public List<IUser> Users { get; set; }
         public List<IBook> Books { get; set; }

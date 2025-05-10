@@ -12,5 +12,6 @@ namespace Library.Data
         List<IEvent> GetEvents();
         void GenerateSampleData();
         void GenerateEmptyDataSet();
+        void AddEvent(IUser user, IBook book, string description);
     }
 }
