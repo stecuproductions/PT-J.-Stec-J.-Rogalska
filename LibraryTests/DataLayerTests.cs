@@ -1,4 +1,5 @@
 ﻿using Library.Data;
+using LibraryTests.TestUtils;
 namespace LibraryTests.DataLayerTests
 
 {
@@ -8,7 +9,7 @@ namespace LibraryTests.DataLayerTests
         [TestMethod]
         public void InMemoryDataProviderTests()
         {
-            var provider = new InMemoryDataProvider();
+            var provider = new SampleDataProvider();
             provider.GenerateSampleData();
             var state = provider.GetLibraryState();
             Assert.IsNotNull(state);
@@ -24,7 +25,7 @@ namespace LibraryTests.DataLayerTests
         [TestMethod]
         public void InMemoryDataProviderEmptyDataSetTest()
         {
-            var provider = new InMemoryDataProvider();
+            var provider = new SampleDataProvider();
             provider.GenerateSampleData();
             provider.GenerateEmptyDataSet();
             var state = provider.GetLibraryState();

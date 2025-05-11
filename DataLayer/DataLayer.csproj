@@ -4,6 +4,54 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <RootNamespace>Library.Data</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="App_Data\LibraryDb.mdf" />
+    <None Remove="App_Data\LibraryDb_log.ldf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="netcore-System.Data.Linq" Version="8.0.1" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<Content Include="App_Data\LibraryDb.mdf">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="App_Data\LibraryDb_log.ldf">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+
+
+	<ItemGroup>
+    <Service Include="{3259aa49-8aa1-44d3-9025-a0b520596a8c}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="LibraryDb.designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>LibraryDb.dbml</DependentUpon>
+    </Compile>
+    <Compile Update="LibraryDb.designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>LibraryDb.dbml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="LibraryDb.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>LibraryDb.designer.cs</LastGenOutput>
+    </None>
+    <None Update="LibraryDb.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>LibraryDb.designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
 
 </Project>

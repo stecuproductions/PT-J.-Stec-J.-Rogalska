@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Library.Data;
 using Library.Logic;
+using LibraryTests.TestUtils;
 
 namespace LibraryTests
 {
@@ -14,7 +15,7 @@ namespace LibraryTests
         [TestMethod]
         public void BorrowBookTest()
         {
-            var dataProvider = new InMemoryDataProvider();
+            var dataProvider = new SampleDataProvider();
             dataProvider.GenerateSampleData();
             var state = dataProvider.GetLibraryState();
             var user = state.Users.First();
@@ -29,7 +30,7 @@ namespace LibraryTests
         [TestMethod]
         public void ReturnBookTest()
         {
-            var dataProvider = new InMemoryDataProvider();
+            var dataProvider = new SampleDataProvider();
             dataProvider.GenerateSampleData();
             var state = dataProvider.GetLibraryState();
             var user = state.Users.First();
@@ -45,7 +46,7 @@ namespace LibraryTests
         [TestMethod]
         public void GetAvailableBooksTest_AllBooksAvailable()
         {
-            var dataProvider = new InMemoryDataProvider();
+            var dataProvider = new SampleDataProvider();
             dataProvider.GenerateSampleData();
             var state = dataProvider.GetLibraryState();
             var user = state.Users.First();
@@ -59,7 +60,7 @@ namespace LibraryTests
         [TestMethod]
         public void GetAvailableBooksTest_AllBooksBorrowed()
         {
-            var dataProvider = new InMemoryDataProvider();
+            var dataProvider = new SampleDataProvider();
             dataProvider.GenerateSampleData();
             var state = dataProvider.GetLibraryState();
             var user = state.Users.First();
