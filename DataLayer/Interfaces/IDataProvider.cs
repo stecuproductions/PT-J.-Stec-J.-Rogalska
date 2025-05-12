@@ -10,8 +10,14 @@ namespace Library.Data
     {
         ILibraryState GetLibraryState();
         List<IEvent> GetEvents();
-        void GenerateSampleData();
-        void GenerateEmptyDataSet();
-        void AddEvent(IUser user, IBook book, string description);
+        IEvent AddBook(string title, string author, Guid id);
+        IEvent AddUser(string name, Guid id);
+        IEvent RemoveBook(IBook book);
+        IEvent RemoveUser(IUser user);
+        IEvent BorrowBook(IUser user, IBook book);
+        IEvent ReturnBook(IUser user, IBook book);
+
+        IEvent AddEvent(string descriptionm, IUser? user = null , IBook? book = null);
+
     }
 }

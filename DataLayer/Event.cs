@@ -11,7 +11,7 @@ namespace Library.Data
         public Guid Id { get; set; } = Guid.NewGuid();
         public DateTime Timestamp { get; set; } = DateTime.Now;
         public string Description { get; set; } = string.Empty;
-        public IUser User { get; set; } = null!;
-        public IBook Book { get; set; } = null!;
+        public Guid? UserId { get; set; }
+        public Guid?  BookId { get; set; }
     }
 }

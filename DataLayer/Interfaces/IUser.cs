@@ -10,7 +10,6 @@ namespace Library.Data
     {
         Guid Id { get; }
         string Name { get; }
-        List<IBook> BorrowedBooks { get; }
 
     }
 }

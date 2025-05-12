@@ -1,66 +1,128 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+using System.Runtime.CompilerServices;
 using Library.Data;
-
-namespace Library.Logic;
-
-public class LibraryService
+using Library.Logic.dtos;
+[assembly: InternalsVisibleTo("LibraryTests")]
+namespace Library.Logic
 {
-    private readonly IDataProvider _dataProvider;
 
-    public LibraryService(IDataProvider dataProvider)
+    internal class LibraryService : ILibraryService
     {
-        _dataProvider = dataProvider;
-    }
+        private readonly IDataProvider _dataProvider;
 
-    public bool BorrowBook(Guid userId, Guid bookId)
-    {
-        var state = _dataProvider.GetLibraryState();
-        var user = state.Users.FirstOrDefault(u => u.Id == userId);
-        var book = state.Books.FirstOrDefault(b => b.Id == bookId);
+        public LibraryService(IDataProvider dataProvider)
+        {
+            _dataProvider = dataProvider;
+        }
 
-        if (user == null || book == null || book.IsBorrowed)
-            return false;
 
-        book.IsBorrowed = true;
-        user.BorrowedBooks.Add(book);
+        public List<EventDto> GetEvents()
+        {
+            return _dataProvider.GetEvents()
+                .Select(e => new EventDto
+                {
+                    Id = e.Id,
+                    Timestamp = e.Timestamp,
+                    Description = e.Description,
+                    BookId = e.BookId,
+                    UserId = e.UserId
+                })
+                .ToList();
+        }
 
-        var description = $"User '{user.Name}' borrowed '{book.Title}'";
+        public bool AddUser(string name)
+        {
+            var state = _dataProvider.GetLibraryState();
+            if (state.Users.Any(u => u.Name == name)) return false;
+            Guid newId = Guid.NewGuid();
 
-        _dataProvider.AddEvent(user, book, description);
+            _dataProvider.AddUser(name, newId);
+            return true;
+        }
 
-        return true;
-    }
+        public bool AddBook(string title, string author)
+        {
+            var state = _dataProvider.GetLibraryState();
+            if (state.Books.Any(b => b.Title == title && b.Author == author)) return false;
+            Guid newId = Guid.NewGuid();
+            _dataProvider.AddBook(title, author, newId);
+            return true;
+        }
 
-    public bool ReturnBook(Guid userId, Guid bookId)
-    {
-        var state = _dataProvider.GetLibraryState();
-        var user = state.Users.FirstOrDefault(u => u.Id == userId);
-        var book = state.Books.FirstOrDefault(b => b.Id == bookId);
+        public bool RemoveUser(Guid userId)
+        {
+            var state = _dataProvider.GetLibraryState();
+            var user = state.Users.FirstOrDefault(u => u.Id == userId);
+            if (user == null) return false;
+            _dataProvider.RemoveUser(user);
+            return true;
+        }
+        public bool RemoveBook(Guid bookId)
+        {
+            var state = _dataProvider.GetLibraryState();
+            var book = state.Books.FirstOrDefault(b => b.Id == bookId);
+            if (book == null) return false;
+            _dataProvider.RemoveBook(book);
+            return true;
+        }
 
-        if (user == null || book == null || !book.IsBorrowed)
-            return false;
 
-        book.IsBorrowed = false;
-        user.BorrowedBooks.Remove(book);
+        public bool BorrowBook(Guid userId, Guid bookId)
+        {
+            var state = _dataProvider.GetLibraryState();
+            var user = state.Users.FirstOrDefault(u => u.Id == userId);
+            if (user == null) return false;
 
-        var description = $"User '{user.Name}' returned '{book.Title}'";
+            var book = state.Books.FirstOrDefault(b => b.Id == bookId);
+            if (book == null || book.IsBorrowed) return false;
 
-        _dataProvider.AddEvent(user, book, description);
+            _dataProvider.BorrowBook(user, book);
+            return true;
+        }
 
-        return true;
-    }
+        public bool ReturnBook(Guid userId, Guid bookId)
+        {
+            var state = _dataProvider.GetLibraryState();
+            var user = state.Users.FirstOrDefault(u => u.Id == userId);
+            if (user == null) return false;
 
-    public List<IBook> GetAvailableBooks()
-    {
-        return _dataProvider
-            .GetLibraryState()
-            .Books
-            .Where(book => !book.IsBorrowed)
-            .ToList();
+            var book = state.Books.FirstOrDefault(b => b.Id == bookId);
+            if (book == null || !book.IsBorrowed) return false;
+
+            _dataProvider.ReturnBook(user, book);
+            return true;
+        }
+
+
+
+
+        public List<UserDto> GetUsers()
+        {
+            return _dataProvider.GetLibraryState()
+                .Users
+                .Select(u => new UserDto
+                {
+                    Id = u.Id,
+                    Name = u.Name
+                })
+                .ToList();
+        }
+
+        public List<BookDto> GetBooks()
+        {
+            return _dataProvider.GetLibraryState()
+                .Books
+                .Select(b => new BookDto
+                {
+                    Id = b.Id,
+                    Title = b.Title,
+                    Author = b.Author,
+                    IsBorrowed = b.IsBorrowed
+                })
+                .ToList();
+        }
+
     }
 }

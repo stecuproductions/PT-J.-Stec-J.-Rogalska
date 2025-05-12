@@ -11,6 +11,6 @@ public interface IEvent
     Guid Id { get; }
     DateTime Timestamp { get; }
     string Description { get; }
-    IUser User { get; }
-    IBook Book { get; }
+    Guid? UserId { get; }
+    Guid? BookId { get; }
 }
