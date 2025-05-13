@@ -34,6 +34,8 @@ namespace PresentationLayer.ViewModel
                 _selectedBook = value;
                 OnPropertyChanged(nameof(SelectedBook));
                 OnPropertyChanged(nameof(IsSelected));
+                OnPropertyChanged(nameof(BorrowReturnCommand));
+                OnPropertyChanged(nameof(BorrowReturnText));
                 UpdateBookDetails();
             }
         }
@@ -46,6 +48,9 @@ namespace PresentationLayer.ViewModel
         public ICommand ReturnBookCommand { get; }
         public ICommand AddBookCommand { get; }
         public ICommand RemoveBookCommand { get; }
+        public ICommand BorrowReturnCommand => SelectedBook.IsBorrowed ? ReturnBookCommand : BorrowBookCommand;
+
+        public string BorrowReturnText => SelectedBook != null && SelectedBook.IsBorrowed ? "Return Book" : "Borrow Book";
 
         public LibraryViewModel(ILibraryService libraryService)
         {
@@ -111,12 +116,28 @@ namespace PresentationLayer.ViewModel
                 OnPropertyChanged (nameof(SelectedBookTitle));
                 OnPropertyChanged (nameof(SelectedBookAuthor));
                 OnPropertyChanged (nameof(SelectedBookAvailability));
+                OnPropertyChanged(nameof(BorrowReturnText));
+            }
+        }
+
+        private void UpdateBookInCollection()
+        {
+            var updatedBook = _libraryService.GetBooks().FirstOrDefault(b => b.Id == SelectedBook.Id);
+            if (updatedBook != null)
+            {
+                var index = Books.IndexOf(SelectedBook);
+                if(index >= 0)
+                {
+                    Books[index] = updatedBook;
+                }
             }
         }
 
         private void BorrowBook()
         {
             _libraryService.BorrowBook(currentUserId, SelectedBook.Id);
+            UpdateBookDetails();
+            UpdateBookInCollection();
         }
 
         private bool CanBorrow()
@@ -132,6 +153,8 @@ namespace PresentationLayer.ViewModel
         private void ReturnBook()
         {
             _libraryService.ReturnBook(currentUserId, SelectedBook.Id);
+            UpdateBookDetails();
+            UpdateBookInCollection();
         }
 
         public bool IsSelected

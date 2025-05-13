@@ -17,7 +17,7 @@ namespace PresentationLayer.ViewModel
         {
             if (_canExecute != null)
             {
-                _canExecute();
+                return _canExecute();
             }
             return true;
         }

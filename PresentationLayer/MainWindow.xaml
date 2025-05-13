@@ -15,7 +15,14 @@
             <TextBlock x:Name="selectedBookAvailabilty" TextWrapping="Wrap" Text="{Binding SelectedBookAvailability}" FontSize="18"/>
             <TextBlock x:Name="selectedBookId" TextWrapping="Wrap" Text="{Binding SelectedBook.Id}" FontSize="14"/>
             <TextBlock TextWrapping="Wrap"/>
-            <Button Content="Remove Book" Height="41" Width="123" HorizontalAlignment="Right" HorizontalContentAlignment="Center" FontSize="16" FontWeight="Bold" Command="{Binding RemoveBookCommand}" Visibility="Collapsed" x:Name="RemoveBookButton"/>
+            <Grid Height="113" Width="328">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto" MinWidth="264"/>
+                </Grid.ColumnDefinitions>
+                <Button Content="{Binding BorrowReturnText}" x:Name="BorrowReturnButton" Width="112" Margin="0,36,216,36" Grid.Column="0" Grid.ColumnSpan="2" FontSize="16" FontWeight="Bold" Click="BorrowReturnButton_Click" Visibility="Collapsed"/>
+                <Button Content="Remove Book" Width="112" HorizontalAlignment="Left" HorizontalContentAlignment="Center" FontSize="16" FontWeight="Bold" Command="{Binding RemoveBookCommand}" Visibility="Collapsed" x:Name="RemoveBookButton" Grid.Column="1" Margin="132,36,0,36"/>
+            </Grid>
         </StackPanel>
         <Button Content="Add New Book" HorizontalAlignment="Left" Margin="638,24,0,0" VerticalAlignment="Top" Height="41" Width="132" FontSize="16" FontWeight="Bold" Command="{Binding AddBookCommand}"/>
 
