@@ -10,10 +10,10 @@
         <TextBlock x:Name="title" HorizontalAlignment="Left" Margin="27,22,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="37" Width="265" FontSize="32" FontWeight="Bold"><Run Language="pl-pl" Text="Available books"/></TextBlock>
         <ListBox x:Name="booksList" ItemsSource="{Binding Books}" SelectedItem="{Binding SelectedBook, Mode=TwoWay}" DisplayMemberPath="Title" SelectionChanged="ListBox_SelectionChanged" Margin="27,79,366,24" FontSize="14"/>
         <StackPanel Margin="439,79,30,24">
-            <TextBlock x:Name="selectedBookName" TextWrapping="Wrap" Text="TextBlock" FontSize="24" FontWeight="Bold"/>
-            <TextBlock x:Name="selectedBookAuthor" TextWrapping="Wrap" Text="TextBlock" FontSize="18"/>
-            <TextBlock x:Name="selectedBookAvailabilty" TextWrapping="Wrap" Text="TextBlock" FontSize="18"/>
-            <TextBlock x:Name="selectedBookId" TextWrapping="Wrap" Text="TextBlock" FontSize="14"/>
+            <TextBlock x:Name="selectedBookName" TextWrapping="Wrap" Text="{Binding SelectedBookTitle}" FontSize="24" FontWeight="Bold"/>
+            <TextBlock x:Name="selectedBookAuthor" TextWrapping="Wrap" Text="{Binding SelectedBookAuthor}" FontSize="18"/>
+            <TextBlock x:Name="selectedBookAvailabilty" TextWrapping="Wrap" Text="{Binding SelectedBookAvailability}" FontSize="18"/>
+            <TextBlock x:Name="selectedBookId" TextWrapping="Wrap" Text="{Binding SelectedBook.Id}" FontSize="14"/>
         </StackPanel>
 
     </Grid>

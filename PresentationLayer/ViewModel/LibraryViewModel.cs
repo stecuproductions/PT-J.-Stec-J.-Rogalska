@@ -30,8 +30,13 @@ namespace PresentationLayer.ViewModel
             {
                 _selectedBook = value;
                 OnPropertyChanged(nameof(SelectedBook));
+                UpdateBookDetails();
             }
         }
+
+        public string SelectedBookTitle { get; set; }
+        public string SelectedBookAuthor { get; set; }
+        public string SelectedBookAvailability {  get; set; }
 
         public ICommand BorrowBookCommand { get; }
         public ICommand ReturnBookCommand { get; }
@@ -51,6 +56,19 @@ namespace PresentationLayer.ViewModel
             Books = new ObservableCollection<IBookDto>(_libraryService.GetBooks());
             BorrowBookCommand = new RelayCommand(BorrowBook, CanBorrow);
             ReturnBookCommand = new RelayCommand(ReturnBook, CanReturn);
+        }
+
+        private void UpdateBookDetails()
+        {
+            if(SelectedBook != null)
+            {
+                SelectedBookTitle = SelectedBook.Title;
+                SelectedBookAuthor = SelectedBook.Author;
+                SelectedBookAvailability = SelectedBook.IsBorrowed ? "Borrowed" : "Available";
+                OnPropertyChanged (nameof(SelectedBookTitle));
+                OnPropertyChanged (nameof(SelectedBookAuthor));
+                OnPropertyChanged (nameof(SelectedBookAvailability));
+            }
         }
 
         private void BorrowBook()
