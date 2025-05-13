@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 [assembly: InternalsVisibleTo("Program")]
+[assembly: InternalsVisibleTo("LibraryTests")]
+
 
 namespace Library.Data.Interfaces
 {

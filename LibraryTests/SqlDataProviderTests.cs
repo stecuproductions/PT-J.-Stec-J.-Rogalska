@@ -11,12 +11,12 @@ namespace LibraryTests
     [TestClass]
     public class SqlDataProviderTests
     {
-        private SqlDataProvider provider;
+        private IDataProvider provider;
 
         [TestInitialize]
-        public void Setup()
-        {
-            provider = new SqlDataProvider("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\jroga\\Desktop\\studia\\IV\\PT\\progtech\\PT-J.-Stec-J.-Rogalska\\DataLayer\\App_Data\\LibraryDb.mdf;Integrated Security=True");
+        public void Setup() { 
+        
+            provider = DataProviderFactory.CreateSqlDataProvider();
         }
         [TestMethod]
         public void AddAndDeleteUserTest()

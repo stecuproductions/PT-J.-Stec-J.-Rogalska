@@ -12,7 +12,7 @@ namespace Library.Data
     {
         public static IDataProvider CreateSqlDataProvider()
         {
-            string connString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\jroga\\Desktop\\studia\\IV\\PT\\progtech\\PT-J.-Stec-J.-Rogalska\\DataLayer\\App_Data\\LibraryDb.mdf;Integrated Security=True";
+            string connString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\stecu\\OneDrive\\Pulpit\\Notatki\\Semestr 4\\PT\\Repo\\DataLayer\\App_Data\\LibraryDb.mdf;Integrated Security=True";
             return new SqlDataProvider(connString);
         }
     }
