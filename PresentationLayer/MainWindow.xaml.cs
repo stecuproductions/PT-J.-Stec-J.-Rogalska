@@ -28,7 +28,14 @@ namespace PresentationLayer
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            if(booksList.SelectedItem != null)
+            {
+                RemoveBookButton.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                RemoveBookButton.Visibility= Visibility.Collapsed;
+            }
         }
     }
 }

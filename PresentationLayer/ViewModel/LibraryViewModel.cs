@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using Library.Logic;
 using LogicLayer.dtos;
@@ -32,6 +33,7 @@ namespace PresentationLayer.ViewModel
             {
                 _selectedBook = value;
                 OnPropertyChanged(nameof(SelectedBook));
+                OnPropertyChanged(nameof(IsSelected));
                 UpdateBookDetails();
             }
         }
@@ -43,6 +45,7 @@ namespace PresentationLayer.ViewModel
         public ICommand BorrowBookCommand { get; }
         public ICommand ReturnBookCommand { get; }
         public ICommand AddBookCommand { get; }
+        public ICommand RemoveBookCommand { get; }
 
         public LibraryViewModel(ILibraryService libraryService)
         {
@@ -60,6 +63,30 @@ namespace PresentationLayer.ViewModel
             BorrowBookCommand = new RelayCommand(BorrowBook, CanBorrow);
             ReturnBookCommand = new RelayCommand(ReturnBook, CanReturn);
             AddBookCommand = new RelayCommand(OpenAddBookDialog);
+            RemoveBookCommand = new RelayCommand(RemoveBook, CanRemove);
+        }
+
+        private void RemoveBook()
+        {
+            if(SelectedBook != null)
+            {
+                var confirmWindow = new ConfirmDelete(SelectedBook.Title, SelectedBook.Author)
+                {
+                    Owner = Application.Current.MainWindow
+                };
+                confirmWindow.ShowDialog();
+                if(confirmWindow.confirmed)
+                {
+                    _libraryService.RemoveBook(SelectedBook.Id);
+                    Books.Remove(SelectedBook);
+                    SelectedBook = null;
+                }
+            }
+        }
+
+        private bool CanRemove()
+        {
+            return SelectedBook != null;
         }
 
         private void OpenAddBookDialog()
@@ -105,6 +132,11 @@ namespace PresentationLayer.ViewModel
         private void ReturnBook()
         {
             _libraryService.ReturnBook(currentUserId, SelectedBook.Id);
+        }
+
+        public bool IsSelected
+        {
+            get { return SelectedBook != null; }
         }
 
         private void OnPropertyChanged(string propertyName)

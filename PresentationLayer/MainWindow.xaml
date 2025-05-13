@@ -14,8 +14,10 @@
             <TextBlock x:Name="selectedBookAuthor" TextWrapping="Wrap" Text="{Binding SelectedBookAuthor}" FontSize="18"/>
             <TextBlock x:Name="selectedBookAvailabilty" TextWrapping="Wrap" Text="{Binding SelectedBookAvailability}" FontSize="18"/>
             <TextBlock x:Name="selectedBookId" TextWrapping="Wrap" Text="{Binding SelectedBook.Id}" FontSize="14"/>
+            <TextBlock TextWrapping="Wrap"/>
+            <Button Content="Remove Book" Height="41" Width="123" HorizontalAlignment="Right" HorizontalContentAlignment="Center" FontSize="16" FontWeight="Bold" Command="{Binding RemoveBookCommand}" Visibility="Collapsed" x:Name="RemoveBookButton"/>
         </StackPanel>
-        <Button Content="Add New Book" HorizontalAlignment="Left" Margin="638,22,0,0" VerticalAlignment="Top" Height="41" Width="132" FontSize="16" FontWeight="Bold" Command="{Binding AddBookCommand}"/>
+        <Button Content="Add New Book" HorizontalAlignment="Left" Margin="638,24,0,0" VerticalAlignment="Top" Height="41" Width="132" FontSize="16" FontWeight="Bold" Command="{Binding AddBookCommand}"/>
 
     </Grid>
 </Window>
