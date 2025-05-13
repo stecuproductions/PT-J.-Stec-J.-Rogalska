@@ -23,6 +23,8 @@ namespace PresentationLayer.ViewModel
 
         private IBookDto _selectedBook;
 
+        public ILibraryService LibraryService => _libraryService;
+
         public IBookDto SelectedBook
         {
             get => _selectedBook;
@@ -40,6 +42,7 @@ namespace PresentationLayer.ViewModel
 
         public ICommand BorrowBookCommand { get; }
         public ICommand ReturnBookCommand { get; }
+        public ICommand AddBookCommand { get; }
 
         public LibraryViewModel(ILibraryService libraryService)
         {
@@ -56,6 +59,19 @@ namespace PresentationLayer.ViewModel
             Books = new ObservableCollection<IBookDto>(_libraryService.GetBooks());
             BorrowBookCommand = new RelayCommand(BorrowBook, CanBorrow);
             ReturnBookCommand = new RelayCommand(ReturnBook, CanReturn);
+            AddBookCommand = new RelayCommand(OpenAddBookDialog);
+        }
+
+        private void OpenAddBookDialog()
+        {
+            AddBookWindow addBookWindow = new AddBookWindow();
+            addBookWindow.ShowDialog();
+            Books.Clear();
+            var updated = _libraryService.GetBooks();
+            foreach (var book in updated)
+            {
+                Books.Add(book);
+            }
         }
 
         private void UpdateBookDetails()
