@@ -22,8 +22,7 @@ namespace Library.Data
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="C:\\USERS\\STECU\\ONEDRIVE\\PULPIT\\NOTATKI\\SEMESTR 4\\PT\\REPO\\DATALAYER\\APP_DATA\\LIBRA" +
-		"RYDB.MDF")]
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name= "C:\\Users\\jroga\\Desktop\\studia\\IV\\PT\\progtech\\PT-J.-Stec-J.-Rogalska\\DataLayer\\App_Data\\LibraryDb.mdf")]
 	public partial class LibraryDbDataContext : System.Data.Linq.DataContext
 	{
 		

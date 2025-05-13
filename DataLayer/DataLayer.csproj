@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="netcore-System.Data.Linq" Version="8.0.1" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="9.0.4" />
   </ItemGroup>
 
   <ItemGroup>

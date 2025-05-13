@@ -16,9 +16,8 @@ namespace LibraryTests
         [TestInitialize]
         public void Setup()
         {
-            provider = new SqlDataProvider(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\USERS\STECU\ONEDRIVE\PULPIT\NOTATKI\SEMESTR 4\PT\REPO\DATALAYER\APP_DATA\LIBRARYDB.MDF;Integrated Security=True;");
+            provider = new SqlDataProvider("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\jroga\\Desktop\\studia\\IV\\PT\\progtech\\PT-J.-Stec-J.-Rogalska\\DataLayer\\App_Data\\LibraryDb.mdf;Integrated Security=True");
         }
-
         [TestMethod]
         public void AddAndDeleteUserTest()
         {

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LogicLayer.dtos;
 
 namespace Library.Logic.dtos
 {
-    public class EventDto
+    internal class EventDto : IEventDto
     {
         public Guid Id { get; set; }
         public DateTime Timestamp { get; set; }

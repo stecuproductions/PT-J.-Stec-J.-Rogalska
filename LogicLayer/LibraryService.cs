@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using Library.Data;
 using Library.Logic.dtos;
+using LogicLayer.dtos;
 [assembly: InternalsVisibleTo("LibraryTests")]
 namespace Library.Logic
 {
@@ -18,7 +19,7 @@ namespace Library.Logic
         }
 
 
-        public List<EventDto> GetEvents()
+        public List<IEventDto> GetEvents()
         {
             return _dataProvider.GetEvents()
                 .Select(e => new EventDto
@@ -29,6 +30,7 @@ namespace Library.Logic
                     BookId = e.BookId,
                     UserId = e.UserId
                 })
+                .Cast<IEventDto>()
                 .ToList();
         }
 
@@ -98,7 +100,7 @@ namespace Library.Logic
 
 
 
-        public List<UserDto> GetUsers()
+        public List<IUserDto> GetUsers()
         {
             return _dataProvider.GetLibraryState()
                 .Users
@@ -107,10 +109,11 @@ namespace Library.Logic
                     Id = u.Id,
                     Name = u.Name
                 })
+                .Cast<IUserDto>()
                 .ToList();
         }
 
-        public List<BookDto> GetBooks()
+        public List<IBookDto> GetBooks()
         {
             return _dataProvider.GetLibraryState()
                 .Books
@@ -121,6 +124,7 @@ namespace Library.Logic
                     Author = b.Author,
                     IsBorrowed = b.IsBorrowed
                 })
+                .Cast<IBookDto>()
                 .ToList();
         }
 
