@@ -91,14 +91,7 @@ namespace Library.Data.Implementation
                 where b.Id == bookId
                 select b).FirstOrDefault();
 
-            if (currentBook == null) 
-            {
-                throw new Exception("Book not found");
-            }
-            if (currentBook.IsBorrowed)
-            {
-                throw new Exception("Book is already borrowed");
-            }
+
             currentBook.IsBorrowed = true;
             borrow borrow = new borrow()
             {
@@ -168,14 +161,7 @@ namespace Library.Data.Implementation
                 where b.Id == bookId
                 select b).FirstOrDefault();
 
-            if (currentBook == null) 
-            {
-                throw new Exception("Book not found");
-            }
-            if (!currentBook.IsBorrowed)
-            {
-                throw new Exception("Book is already available");
-            }
+
             currentBook.IsBorrowed = false;
              returnE currentReturn = new returnE()
             {
