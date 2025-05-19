@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="libraryDb" Class="LibraryDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Table Name="dbo.Books" Member="book">
+    <Type Name="book">
+      <Column Name="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Author" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="IsBorrowed" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="book_borrow" Member="borrow" Storage="_Borrows" ThisKey="Id" OtherKey="BookId" Type="borrow" />
+      <Association Name="book_return" Member="returnE" Storage="_Returns" ThisKey="Id" OtherKey="BookId" Type="returnE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Borrows" Member="borrow">
+    <Type Name="borrow">
+      <Column Name="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="BookId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="Date" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Association Name="book_borrow" Member="book" Storage="_Books" ThisKey="BookId" OtherKey="Id" Type="book" IsForeignKey="true" />
+      <Association Name="user_borrow" Member="user" Storage="_Users" ThisKey="UserId" OtherKey="Id" Type="user" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[Returns]" Member="returnE">
+    <Type Name="returnE">
+      <Column Name="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="BookId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="Date" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Association Name="book_return" Member="book" Storage="_Books" ThisKey="BookId" OtherKey="Id" Type="book" IsForeignKey="true" />
+      <Association Name="user_return" Member="user" Storage="_Users" ThisKey="UserId" OtherKey="Id" Type="user" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Users" Member="user">
+    <Type Name="user">
+      <Column Name="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Surname" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="user_borrow" Member="borrow" Storage="_Borrows" ThisKey="Id" OtherKey="UserId" Type="borrow" />
+      <Association Name="user_return" Member="returnE" Storage="_Returns" ThisKey="Id" OtherKey="UserId" Type="returnE" />
+    </Type>
+  </Table>
+</Database>
