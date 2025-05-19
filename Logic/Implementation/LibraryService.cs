@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Library.Data.API;
 using Library.Logic.API;
-
+[assembly: InternalsVisibleTo("Library.LogicTests")]
 namespace Library.Logic.Implementation
 {
     internal class LibraryService : ILibraryService
     {
-        private IDataRepository _dataRepository;
+        protected IDataRepository _dataRepository;
 
         public override bool AddBookLogic(string title, string author)
         {
@@ -131,6 +132,66 @@ namespace Library.Logic.Implementation
                     booksLogic.Add(bookLogic);
                 }
                 return booksLogic;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+        }
+
+        public override IEnumerable<IBorrowLogic> GetNBorrowsLogic(int n, int offset)
+        {
+            try
+            {
+                List<IBorrow> borrows = _dataRepository.GetNBorrows(n, offset);
+                List<IBorrowLogic> borrowsLogic = new List<IBorrowLogic>();
+                foreach (IBorrow borrow in borrows)
+                {
+                    if (borrow == null)
+                    {
+                        break;
+                    }
+                    BorrowLogic borrowLogic = new BorrowLogic()
+                    {
+                        Id = borrow.Id,
+                        BookId = borrow.BookId,
+                        UserId = borrow.UserId,
+                        Date = borrow.Date
+                    };
+                    borrowsLogic.Add(borrowLogic);
+                }
+                return borrowsLogic;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+        }
+
+        public override IEnumerable<IReturnLogic> GetNReturnsLogic(int n, int offset)
+        {
+            try
+            {
+                List<IReturn> returns = _dataRepository.GetNReturns(n, offset);
+                List<IReturnLogic> returnsLogic = new List<IReturnLogic>();
+                foreach (IReturn returnEvent in returns)
+                {
+                    if (returnEvent == null)
+                    {
+                        break;
+                    }
+                    ReturnLogic returnLogic = new ReturnLogic()
+                    {
+                        Id = returnEvent.Id,
+                        BookId = returnEvent.BookId,
+                        UserId = returnEvent.UserId,
+                        Date = returnEvent.Date
+                    };
+                    returnsLogic.Add(returnLogic);
+                }
+                return returnsLogic;
             }
             catch (Exception ex)
             {

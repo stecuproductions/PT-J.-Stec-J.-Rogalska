@@ -8,6 +8,8 @@ using Library.Data.API;
 //SqlLocalDB stop MSSQLLocalDB
 
 [assembly: InternalsVisibleTo("Library.DataTests")]
+[assembly: InternalsVisibleTo("Library.LogicTests")]
+
 namespace Library.Data.Implementation
 {
     internal class DataRepository : IDataRepository

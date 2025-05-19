@@ -18,7 +18,10 @@ namespace Library.Logic.API
         public abstract bool BorrowBookLogic(Guid userId, Guid bookId);
         public abstract bool ReturnBookLogic(Guid userId, Guid bookId);
         public abstract bool DeleteBookWithEventsLogic(Guid bookId);
-        
+        public abstract IEnumerable<IBorrowLogic> GetNBorrowsLogic(int n, int offset);
+        public abstract IEnumerable<IReturnLogic> GetNReturnsLogic(int n, int offset);
+
+        //factory method
         ILibraryService(string connectionString)
         {
             _dataRepository = IDataRepository.GetDataRepository(connectionString);
