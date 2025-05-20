@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Library.Logic.API;
 using Library.Presentation.Model.Implementation;
 using Library.Presentation.View;
 using Library.Presentation.ViewModel;
@@ -20,11 +21,13 @@ namespace Library.Presentation
     public partial class MainWindow : Window
     {
         private readonly UserModel _user;
+        private readonly ILibraryService _libraryService;
         private readonly MainViewModel _viewModel;
-        public MainWindow(UserModel user)
+        public MainWindow(UserModel user, ILibraryService libSer)
         {
             InitializeComponent();
             _user = user;
+            _libraryService = libSer;
             _viewModel = new MainViewModel(user);
             DataContext = _viewModel;
             _viewModel.RequestOpenWindow += ViewModel_RequestOpenWindow;
@@ -34,7 +37,7 @@ namespace Library.Presentation
         {
             if(windowType == "Borrow")
             {
-                new BorrowWindow(user).Show();
+                new BorrowWindow(user, _libraryService).Show();
             }
             else if(windowType == "Return")
             {

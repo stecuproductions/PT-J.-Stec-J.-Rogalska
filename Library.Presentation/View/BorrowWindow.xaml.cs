@@ -11,7 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Library.Logic.API;
 using Library.Presentation.Model.Implementation;
+using Library.Presentation.ViewModel;
 
 namespace Library.Presentation.View
 {
@@ -21,10 +23,13 @@ namespace Library.Presentation.View
     public partial class BorrowWindow : Window
     {
         private readonly UserModel _user;
-        public BorrowWindow(UserModel user)
+        private readonly BorrowViewModel _borrowViewModel;
+        public BorrowWindow(UserModel user, ILibraryService libraryService)
         {
             InitializeComponent();
             _user = user;
+            _borrowViewModel = new BorrowViewModel(libraryService, user);
+            DataContext = new BorrowViewModel(libraryService, user);
             Title = $"Borrow Books - {_user.Name} {_user.Surname}";
         }
     }

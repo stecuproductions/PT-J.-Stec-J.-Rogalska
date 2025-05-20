@@ -1,0 +1,13 @@
+﻿<Window x:Class="Library.Presentation.View.AddBookWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Add Book" Height="250" Width="350">
+    <Grid>
+        <TextBlock HorizontalAlignment="Left" Margin="25,85,0,0" TextWrapping="Wrap" Text="Please enter book author:" VerticalAlignment="Top" RenderTransformOrigin="0.234,2.904" FontSize="16"/>
+        <TextBlock HorizontalAlignment="Left" Margin="25,21,0,0" TextWrapping="Wrap" Text="Please enter book title:" VerticalAlignment="Top" FontSize="16"/>
+        <TextBox HorizontalAlignment="Left" Margin="25,47,0,0" TextWrapping="Wrap" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="284" FontSize="16" x:Name="TitleTextBox"/>
+        <TextBox HorizontalAlignment="Left" Margin="25,111,0,0" TextWrapping="Wrap" Text="{Binding Author, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="284" FontSize="16" x:Name="AuthorTextBox"/>
+        <Button Content="OK" HorizontalAlignment="Center" Margin="0,152,0,0" VerticalAlignment="Top" Height="28" Width="78" FontSize="16" Command="{Binding AddBookCommand}"/>
+
+    </Grid>
+</Window>

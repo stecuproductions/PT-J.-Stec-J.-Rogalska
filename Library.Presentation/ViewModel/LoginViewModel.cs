@@ -74,7 +74,7 @@ namespace Library.Presentation.ViewModel
                 MessageBox.Show("New user created.");
                 user = FindUserByName(name, surname);
             }
-            MainWindow main = new MainWindow(user);
+            MainWindow main = new MainWindow(user, _libraryService);
             Application.Current.MainWindow.Close();
             Application.Current.MainWindow = main;
             main.Show();

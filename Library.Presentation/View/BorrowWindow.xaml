@@ -7,6 +7,16 @@
         mc:Ignorable="d"
         Title="BorrowWindow" Height="450" Width="800">
     <Grid>
-        
+        <ListBox ItemsSource="{Binding AvailableBooks}" DisplayMemberPath="Title" SelectedItem="{Binding SelectedBook}" Margin="41,72,347,32" FontSize="16"/>
+        <TextBlock HorizontalAlignment="Left" Height="44" Margin="41,19,0,0" TextWrapping="Wrap" Text="Available books" VerticalAlignment="Top" Width="328" FontWeight="Bold" FontSize="36"/>
+        <StackPanel HorizontalAlignment="Left" Height="330" Margin="490,72,0,0" VerticalAlignment="Top" Width="267">
+            <TextBlock TextWrapping="Wrap" Text="{Binding SelectedBook.Title}" FontWeight="Bold" FontSize="26"/>
+            <TextBlock TextWrapping="Wrap" Text="{Binding SelectedBook.Author}" FontSize="20"/>
+            <TextBlock TextWrapping="Wrap" Text="{Binding SelectedBook.Id}" FontSize="14"/>
+            <TextBlock TextWrapping="Wrap"/>
+            <Button Content="Borrow" Height="34" Width="123" FontWeight="Bold" FontSize="16" HorizontalAlignment="Right" Command="{Binding BorrowCommand}"/>
+        </StackPanel>
+        <Button Content="Add book" HorizontalAlignment="Left" Margin="634,33,0,0" VerticalAlignment="Top" Height="34" Width="123" FontWeight="Bold" FontSize="16" Command="{Binding AddBookCommand}"/>
+
     </Grid>
 </Window>
