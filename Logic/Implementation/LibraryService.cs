@@ -9,7 +9,7 @@ using Library.Logic.API;
 [assembly: InternalsVisibleTo("Library.LogicTests")]
 namespace Library.Logic.Implementation
 {
-    public class LibraryService : ILibraryService
+    internal class LibraryService : ILibraryService
     {
         protected IDataRepository _dataRepository;
         

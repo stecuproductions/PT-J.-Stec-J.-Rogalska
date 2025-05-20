@@ -1,4 +1,6 @@
 ﻿using Library.Logic.API;
+using Library.Presentation.Model.Implementation;
+using Library.Presentation.ViewModel;
 using Library.ViewModelTests.Mocks;
 
 namespace Library.ReturnViewModelTests
@@ -22,8 +24,32 @@ namespace Library.ReturnViewModelTests
         [TestMethod]
         public void LoadBorrowedBooks()
         {
-            MockUser user = new MockUser { Id = _testUserId};
-
+            UserModel user = new UserModel { Id = _testUserId};
+            ReturnViewModel vm = new ReturnViewModel(_mockService, user);
+            Assert.AreEqual(2, vm.BorrowedBooks.Count);
+            Assert.IsTrue(vm.BorrowedBooks.All(b => b.IsBorrowed));
+        }
+        [TestMethod]
+        public void ReturnBookCommand()
+        {
+            UserModel user = new UserModel { Id= _testUserId};
+            ReturnViewModel vm = new ReturnViewModel(_mockService, user);
+            vm.SelectedBook = vm.BorrowedBooks.First();
+            Assert.IsTrue(vm.ReturnCommand.CanExecute(null));
+            Guid selectedBookId = vm.SelectedBook?.Id ?? Guid.Empty;
+            vm.ReturnCommand.Execute(null);
+            Assert.IsFalse(vm.BorrowedBooks.Any(b => b.Id == selectedBookId));
+            IBookLogic returnedBook = _mockService.GetBookByIdLogic(selectedBookId);
+            Assert.IsNotNull(returnedBook);
+            Assert.IsFalse(returnedBook.IsBorrowed);
+        }
+        [TestMethod]
+        public void ReturnCommand_WithoutSelectedBook()
+        {
+            UserModel user = new UserModel { Id = _testUserId };
+            ReturnViewModel vm = new ReturnViewModel(_mockService, user);
+            vm.SelectedBook = null;
+            Assert.IsFalse(vm.ReturnCommand.CanExecute(null));
         }
     }
 }

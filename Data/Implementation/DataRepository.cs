@@ -12,7 +12,7 @@ using Library.Data.API;
 
 namespace Library.Data.Implementation
 {
-    public class DataRepository : IDataRepository
+    internal class DataRepository : IDataRepository
     {
         protected LibraryDataContext _context;
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -11,6 +12,9 @@ using Library.Logic.API;
 using Library.Presentation.Model.Implementation;
 using Library.Presentation.View;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+
+[assembly: InternalsVisibleTo("Library.ViewModelTests")]
+
 
 namespace Library.Presentation.ViewModel
 {
