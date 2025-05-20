@@ -21,6 +21,7 @@ namespace Library.Presentation.ViewModel
         private readonly ILibraryService _libraryService;
         private readonly UserModel _currentUser;
         private Dictionary<Guid, DateTime> _borrowDates = new();
+        private readonly IMessageService _messageService;
         public ObservableCollection<BookModel> BorrowedBooks { get; set; } = new();
         private BookModel? _selectedBook;
         public DateTime? SelectedBorrowDate
@@ -47,10 +48,11 @@ namespace Library.Presentation.ViewModel
             }
         }
         public ICommand ReturnCommand { get; }
-        public ReturnViewModel(ILibraryService libraryService, UserModel user)
+        public ReturnViewModel(ILibraryService libraryService, UserModel user, IMessageService service)
         {
             _libraryService = libraryService;
             _currentUser = user;
+            _messageService = service;
             ReturnCommand = new RelayCommand(ReturnBook, CanReturn);
             LoadBorrowedBooks();
         }
@@ -147,11 +149,11 @@ namespace Library.Presentation.ViewModel
             {
                 LoadBorrowedBooks();
                 SelectedBook = null;
-                MessageBox.Show("Book returned successfully.");
+                _messageService.ShowMessage("Book returned successfully.");
             }
             else
             {
-                MessageBox.Show("Failed to return the book.");
+                _messageService.ShowMessage("Failed to return the book.");
             }
         }
         protected void OnPropertyChanged(string name)

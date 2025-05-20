@@ -26,7 +26,7 @@ namespace Library.Presentation.View
         public ReturnWindow(UserModel user, ILibraryService libraryService)
         {
             InitializeComponent();
-            DataContext = new ReturnViewModel(libraryService, user);
+            DataContext = new ReturnViewModel(libraryService, user, new MessageBoxService());
             _user = user;
             Title = $"Return Books - {_user.Name} {_user.Surname}";
         }

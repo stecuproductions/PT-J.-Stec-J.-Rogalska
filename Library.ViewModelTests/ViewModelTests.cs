@@ -1,12 +1,13 @@
 ﻿using Library.Logic.API;
+using Library.Presentation;
 using Library.Presentation.Model.Implementation;
 using Library.Presentation.ViewModel;
 using Library.ViewModelTests.Mocks;
 
-namespace Library.ReturnViewModelTests
+namespace Library.ViewModelTests
 {
     [TestClass]
-    public class ReturnViewModelTests
+    public class ViewModelTests
     {
         private Guid _testUserId = Guid.NewGuid();
         private MockLibraryService _mockService;
@@ -25,7 +26,8 @@ namespace Library.ReturnViewModelTests
         public void LoadBorrowedBooks()
         {
             UserModel user = new UserModel { Id = _testUserId};
-            ReturnViewModel vm = new ReturnViewModel(_mockService, user);
+            var mockMessageService = new MockMessageService();
+            ReturnViewModel vm = new ReturnViewModel(_mockService, user, mockMessageService);
             Assert.AreEqual(2, vm.BorrowedBooks.Count);
             Assert.IsTrue(vm.BorrowedBooks.All(b => b.IsBorrowed));
         }
@@ -33,7 +35,8 @@ namespace Library.ReturnViewModelTests
         public void ReturnBookCommand()
         {
             UserModel user = new UserModel { Id= _testUserId};
-            ReturnViewModel vm = new ReturnViewModel(_mockService, user);
+            var mockMessageService = new MockMessageService();
+            ReturnViewModel vm = new ReturnViewModel(_mockService, user, mockMessageService);
             vm.SelectedBook = vm.BorrowedBooks.First();
             Assert.IsTrue(vm.ReturnCommand.CanExecute(null));
             Guid selectedBookId = vm.SelectedBook?.Id ?? Guid.Empty;
@@ -47,7 +50,8 @@ namespace Library.ReturnViewModelTests
         public void ReturnCommand_WithoutSelectedBook()
         {
             UserModel user = new UserModel { Id = _testUserId };
-            ReturnViewModel vm = new ReturnViewModel(_mockService, user);
+            var mockMessageService = new MockMessageService();
+            ReturnViewModel vm = new ReturnViewModel(_mockService, user, mockMessageService);
             vm.SelectedBook = null;
             Assert.IsFalse(vm.ReturnCommand.CanExecute(null));
         }
