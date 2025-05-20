@@ -41,7 +41,7 @@ namespace Library.Presentation
             }
             else if(windowType == "Return")
             {
-                new ReturnWindow(user).Show();
+                new ReturnWindow(user, _libraryService).Show();
             }
         }
     }

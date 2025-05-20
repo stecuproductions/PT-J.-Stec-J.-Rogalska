@@ -7,6 +7,14 @@
         mc:Ignorable="d"
         Title="ReturnWindow" Height="450" Width="800">
     <Grid>
-        
+        <ListBox ItemsSource="{Binding BorrowedBooks}" DisplayMemberPath="Title" SelectedItem="{Binding SelectedBook}" Margin="41,72,347,32" FontSize="16"/>
+        <TextBlock HorizontalAlignment="Left" Height="44" Margin="41,19,0,0" TextWrapping="Wrap" Text="Borrowed books" VerticalAlignment="Top" Width="328" FontWeight="Bold" FontSize="36"/>
+        <StackPanel HorizontalAlignment="Left" Height="330" Margin="490,72,0,0" VerticalAlignment="Top" Width="267">
+            <TextBlock TextWrapping="Wrap" Text="{Binding SelectedBook.Title}" FontWeight="Bold" FontSize="26"/>
+            <TextBlock TextWrapping="Wrap" Text="{Binding SelectedBook.Author}" FontSize="20"/>
+            <TextBlock TextWrapping="Wrap" Text="{Binding SelectedBook.Id}" FontSize="14"/>
+            <TextBlock TextWrapping="Wrap"/>
+            <Button Content="Return" Height="34" Width="123" FontWeight="Bold" FontSize="16" HorizontalAlignment="Right" Command="{Binding ReturnCommand}"/>
+        </StackPanel>
     </Grid>
 </Window>
