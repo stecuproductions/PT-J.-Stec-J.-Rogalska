@@ -21,7 +21,7 @@ namespace Library.Presentation.View
     /// </summary>
     public partial class LoginWindow : Window
     {
-        public LoginWindow(LoginViewModel viewModel)
+        internal LoginWindow(LoginViewModel viewModel)
         {
             InitializeComponent();
             DataContext = viewModel;

@@ -22,13 +22,13 @@ namespace Library.Logic.API
         public abstract IEnumerable<IReturnLogic> GetNReturnsLogic(int n, int offset);
 
         //factory method
-        ILibraryService(string connectionString)
+        public ILibraryService(string connectionString)
         {
-            _dataRepository = IDataRepository.GetDataRepository(connectionString);
+            _dataRepository = DataRepositoryFactory.GetDataRepository(connectionString);
         }
         public ILibraryService()
         {
-            _dataRepository = IDataRepository.GetDataRepository();
+            _dataRepository = DataRepositoryFactory.GetDataRepository();
         }
     }
 }

@@ -13,10 +13,10 @@ namespace Library.LogicTests.Mocks
 {
     internal class LibraryServiceWithMockRepo: LibraryService
     {
-        public LibraryServiceWithMockRepo(MockRepo repo) {
-            _dataRepository = repo;
+        public LibraryServiceWithMockRepo(MockRepo repo) : base(repo)
+        {
         }
-        
+
 
     }
 }

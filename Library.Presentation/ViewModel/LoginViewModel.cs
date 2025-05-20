@@ -69,6 +69,7 @@ namespace Library.Presentation.ViewModel
                 if (!created) 
                 {
                     MessageBox.Show("User creation failed.");
+                    
                     return;
                 }
                 MessageBox.Show("New user created.");

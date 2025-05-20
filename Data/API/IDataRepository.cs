@@ -24,14 +24,6 @@ namespace Library.Data.API
 
         public abstract void DeleteBookWithEvents(Guid id);
         //Constructors
-        public static IDataRepository GetDataRepository()
-        {
-            return new DataRepository();
-        }
-        public static IDataRepository GetDataRepository(string connectionString) 
-        {
-            return new DataRepository(connectionString);
-        }
 
     }
 }
