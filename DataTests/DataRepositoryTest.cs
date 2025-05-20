@@ -10,7 +10,7 @@ namespace Library.DataTests
     [DoNotParallelize]
     public class DataRepositoryTest
     {
-        private const string defaultConnectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\jroga\\Desktop\\studia\\IV\\PT\\progtech\\task2\\App_Data\\LibraryDb.mdf;Integrated Security=True;Encrypt=True";
+        private const string defaultConnectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=libraryDb;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False";
         private  ClearableDataRepository dataProvider;
         [TestInitialize]
         public void Setup()
