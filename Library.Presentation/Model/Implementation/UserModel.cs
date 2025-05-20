@@ -7,7 +7,7 @@ using Library.Presentation.Model.API;
 
 namespace Library.Presentation.Model.Implementation
 {
-    internal class UserModel : IUserModel
+    public class UserModel : IUserModel
     {
         public Guid Id { get; set; }
         public string Name { get; set; }

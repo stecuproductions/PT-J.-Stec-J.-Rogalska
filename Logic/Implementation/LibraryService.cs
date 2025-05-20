@@ -9,9 +9,14 @@ using Library.Logic.API;
 [assembly: InternalsVisibleTo("Library.LogicTests")]
 namespace Library.Logic.Implementation
 {
-    internal class LibraryService : ILibraryService
+    public class LibraryService : ILibraryService
     {
         protected IDataRepository _dataRepository;
+        
+        public LibraryService(IDataRepository dataRepo)
+        {
+            _dataRepository = dataRepo ?? throw new ArgumentNullException(nameof(dataRepo));
+        }
 
         public override bool AddBookLogic(string title, string author)
         {

@@ -8,4 +8,24 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Logic\Library.Logic.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EditorConfigFiles Remove="C:\Users\jroga\Desktop\studia\IV\PT\progtech\task2\Library.Presentation\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove=".editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EditorConfigFiles Remove="C:\Users\jroga\Desktop\studia\IV\PT\progtech\task2\Library.Presentation\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EditorConfigFiles Remove="C:\Users\jroga\Desktop\studia\IV\PT\progtech\task2\Library.Presentation\.editorconfig" />
+  </ItemGroup>
+
 </Project>
