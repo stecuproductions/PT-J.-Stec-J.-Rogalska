@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="375">
     <Grid>
-        <Button Content="Borrow books" HorizontalAlignment="Center" Height="58" Margin="0,98,0,0" VerticalAlignment="Top" Width="207" FontSize="20" FontWeight="Bold"/>
-        <Button Content="Return books" HorizontalAlignment="Center" Height="58" Margin="0,254,0,0" VerticalAlignment="Top" Width="207" FontSize="20" FontWeight="Bold"/>
+        <Button Content="Borrow books" HorizontalAlignment="Center" Height="58" Margin="0,98,0,0" VerticalAlignment="Top" Width="207" FontSize="20" FontWeight="Bold" Command="{Binding OpenBorrowCommand}"/>
+        <Button Content="Return books" HorizontalAlignment="Center" Height="58" Margin="0,254,0,0" VerticalAlignment="Top" Width="207" FontSize="20" FontWeight="Bold" Command="{Binding OpenReturnCommand}"/>
 
     </Grid>
 </Window>

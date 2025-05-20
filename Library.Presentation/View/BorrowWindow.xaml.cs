@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Library.Presentation.Model.Implementation;
 
 namespace Library.Presentation.View
 {
@@ -19,9 +20,12 @@ namespace Library.Presentation.View
     /// </summary>
     public partial class BorrowWindow : Window
     {
-        public BorrowWindow()
+        private readonly UserModel _user;
+        public BorrowWindow(UserModel user)
         {
             InitializeComponent();
+            _user = user;
+            Title = $"Borrow Books - {_user.Name} {_user.Surname}";
         }
     }
 }

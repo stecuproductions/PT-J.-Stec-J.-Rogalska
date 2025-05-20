@@ -27,9 +27,5 @@ namespace Library.Presentation.View
             DataContext = viewModel;
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
     }
 }

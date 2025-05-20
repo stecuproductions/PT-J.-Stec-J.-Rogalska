@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Library.Presentation.Model.Implementation;
 
 namespace Library.Presentation.View
 {
@@ -19,9 +20,12 @@ namespace Library.Presentation.View
     /// </summary>
     public partial class ReturnWindow : Window
     {
-        public ReturnWindow()
+        private readonly UserModel _user;
+        public ReturnWindow(UserModel user)
         {
             InitializeComponent();
+            _user = user;
+            Title = $"Return Books - {_user.Name} {_user.Surname}";
         }
     }
 }
