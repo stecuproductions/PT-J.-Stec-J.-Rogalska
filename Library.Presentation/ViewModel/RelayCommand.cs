@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace Library.Presentation.ViewModel
 {
-    public class RelayCommand : ICommand
+    internal class RelayCommand : ICommand
     {
         private readonly Action _execute;
         private readonly Func<bool>? _canExecute;

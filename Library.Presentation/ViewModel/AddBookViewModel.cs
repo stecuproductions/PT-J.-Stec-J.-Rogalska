@@ -11,7 +11,7 @@ using Library.Logic.API;
 
 namespace Library.Presentation.ViewModel
 {
-    public class AddBookViewModel : INotifyPropertyChanged
+    internal class AddBookViewModel : INotifyPropertyChanged
     {
         private string _title = "";
         private string _author = "";

@@ -13,7 +13,7 @@ using Library.Presentation.Model.Implementation;
 
 namespace Library.Presentation.ViewModel
 {
-    public class LoginViewModel : INotifyPropertyChanged
+    internal class LoginViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 
