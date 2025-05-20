@@ -12,7 +12,7 @@ using Library.Presentation.Model.Implementation;
 
 namespace Library.Presentation.ViewModel
 {
-    internal class ReturnViewModel : INotifyPropertyChanged
+    public class ReturnViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
         private readonly ILibraryService _libraryService;

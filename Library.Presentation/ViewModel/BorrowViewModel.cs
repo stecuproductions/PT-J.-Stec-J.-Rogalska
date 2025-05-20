@@ -14,7 +14,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Library.Presentation.ViewModel
 {
-    internal class BorrowViewModel : INotifyPropertyChanged
+    public class BorrowViewModel : INotifyPropertyChanged
     {
         private readonly ILibraryService _libraryService;
         private readonly UserModel _currentUser;

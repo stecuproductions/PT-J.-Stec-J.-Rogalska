@@ -8,7 +8,7 @@ using Library.Presentation.Model.Implementation;
 
 namespace Library.Presentation.ViewModel
 {
-    class MainViewModel
+    public class MainViewModel
     {
         public UserModel User { get; }
         public ICommand OpenBorrowCommand { get; }
