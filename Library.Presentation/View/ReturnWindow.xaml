@@ -13,6 +13,7 @@
             <TextBlock TextWrapping="Wrap" Text="{Binding SelectedBook.Title}" FontWeight="Bold" FontSize="26"/>
             <TextBlock TextWrapping="Wrap" Text="{Binding SelectedBook.Author}" FontSize="20"/>
             <TextBlock TextWrapping="Wrap" Text="{Binding SelectedBook.Id}" FontSize="14"/>
+            <TextBlock TextWrapping="Wrap" Text="{Binding SelectedBorrowDate, StringFormat='Borrowed on: {0:yyyy-MM-dd}'}" FontSize="14"/>
             <TextBlock TextWrapping="Wrap"/>
             <Button Content="Return" Height="34" Width="123" FontWeight="Bold" FontSize="16" HorizontalAlignment="Right" Command="{Binding ReturnCommand}"/>
         </StackPanel>

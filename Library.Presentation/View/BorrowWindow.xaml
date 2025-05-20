@@ -14,7 +14,14 @@
             <TextBlock TextWrapping="Wrap" Text="{Binding SelectedBook.Author}" FontSize="20"/>
             <TextBlock TextWrapping="Wrap" Text="{Binding SelectedBook.Id}" FontSize="14"/>
             <TextBlock TextWrapping="Wrap"/>
-            <Button Content="Borrow" Height="34" Width="123" FontWeight="Bold" FontSize="16" HorizontalAlignment="Right" Command="{Binding BorrowCommand}"/>
+            <Grid Height="100">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Button Content="Delete" Height="34" Width="123" FontWeight="Bold" FontSize="16" Command="{Binding DeleteBookCommand}"/>
+                <Button Content="Borrow" Height="34" Width="123" FontWeight="Bold" FontSize="16" Command="{Binding BorrowCommand}" Grid.Column="1" Margin="21,33,-144,33"/>
+            </Grid>
         </StackPanel>
         <Button Content="Add book" HorizontalAlignment="Left" Margin="634,33,0,0" VerticalAlignment="Top" Height="34" Width="123" FontWeight="Bold" FontSize="16" Command="{Binding AddBookCommand}"/>
 

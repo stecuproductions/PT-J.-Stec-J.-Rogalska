@@ -31,17 +31,20 @@ namespace Library.Presentation.ViewModel
                     _selectedBook = value;
                     OnPropertyChanged(nameof(SelectedBook));
                     ((RelayCommand)BorrowCommand).RaiseCanExecuteChanged();
+                    ((RelayCommand)DeleteBookCommand).RaiseCanExecuteChanged();
                 }
             }
         }
         public ICommand BorrowCommand { get; }
         public ICommand AddBookCommand { get; }
+        public ICommand DeleteBookCommand { get; }
         public BorrowViewModel(ILibraryService libraryService, UserModel user)
         {
             _libraryService = libraryService;
             _currentUser = user;
             BorrowCommand = new RelayCommand(BorrowBook, CanBorrow);
             AddBookCommand = new RelayCommand(OpenAddBookWindow);
+            DeleteBookCommand = new RelayCommand(DeleteBook, CanDelete);
             LoadAvailableBooks();
         }
         private void OpenAddBookWindow()
@@ -85,6 +88,33 @@ namespace Library.Presentation.ViewModel
             {
                 MessageBox.Show("Failed to borrow the book");
             }
+        }
+        private void DeleteBook()
+        {
+            if(SelectedBook == null) return;
+            MessageBoxResult result = MessageBox.Show(
+            $"Are you sure you want to delete '{SelectedBook.Title}'?",
+            "Confirm Delete",
+            MessageBoxButton.YesNo,
+            MessageBoxImage.Warning);
+            if (result == MessageBoxResult.Yes)
+            {
+                bool success = _libraryService.DeleteBookWithEventsLogic(SelectedBook.Id);
+                if(success)
+                {
+                    AvailableBooks.Remove(SelectedBook);
+                    SelectedBook = null;
+                    MessageBox.Show("Book deleted successfullt.");
+                }
+                else
+                {
+                    MessageBox.Show("Failed to delete book.");
+                }
+            }
+        }
+        private bool CanDelete()
+        {
+            return SelectedBook != null;
         }
         protected void OnPropertyChanged(string name)
         {

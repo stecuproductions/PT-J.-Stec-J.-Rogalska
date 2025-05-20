@@ -17,8 +17,18 @@ namespace Library.Presentation.ViewModel
         public event PropertyChangedEventHandler? PropertyChanged;
         private readonly ILibraryService _libraryService;
         private readonly UserModel _currentUser;
+        private Dictionary<Guid, DateTime> _borrowDates = new();
         public ObservableCollection<BookModel> BorrowedBooks { get; set; } = new();
         private BookModel? _selectedBook;
+        public DateTime? SelectedBorrowDate
+        {
+            get
+            {
+                if(SelectedBook == null) return null;
+                if (_borrowDates.TryGetValue(SelectedBook.Id, out DateTime date)) return date;
+                return null;
+            }
+        }
         public BookModel? SelectedBook
         {
             get => _selectedBook;
@@ -28,6 +38,7 @@ namespace Library.Presentation.ViewModel
                 {
                     _selectedBook = value;
                     OnPropertyChanged(nameof(SelectedBook));
+                    OnPropertyChanged(nameof(SelectedBorrowDate));
                     ((RelayCommand)ReturnCommand).RaiseCanExecuteChanged();
                 }
             }
@@ -43,6 +54,7 @@ namespace Library.Presentation.ViewModel
         private void LoadBorrowedBooks()
         {
             BorrowedBooks.Clear();
+            _borrowDates.Clear();
             IEnumerable<IBorrowLogic> userBorrows = GetAllBorrows();
             IEnumerable<IReturnLogic> userReturns = GetAllReturns();
             List<Guid> addedBooks = new List<Guid>();
@@ -66,6 +78,7 @@ namespace Library.Presentation.ViewModel
                             IsBorrowed = book.IsBorrowed
                         });
                         addedBooks.Add(borrow.BookId);
+                        _borrowDates[book.Id] = borrow.Date;
                     }
                 }
             }
